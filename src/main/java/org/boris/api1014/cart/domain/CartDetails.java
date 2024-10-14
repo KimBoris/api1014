@@ -1,24 +1,27 @@
-package org.boris.api1014.product.domain;
-
+package org.boris.api1014.cart.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.boris.api1014.product.domain.Product;
+
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude={"product"})
+@ToString
 @Getter
-public class Review {
+public class CartDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rno;
+    private Long cdno;
 
-    private String reviewText;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cart cart;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
-}
 
+    private int qty;
+}
