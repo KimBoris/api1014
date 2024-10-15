@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Log4j2
 public class MemberRepositoryTests {
 
-    //주입을 받아줘야 한다.
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -29,41 +28,38 @@ public class MemberRepositoryTests {
     private MemberRepository memberRepository;
 
     @Autowired
-    private CartDetailRepository cartDetailRepository;
+    private CartDetailRepository cartDetailsRepository;
 
     @Test
-    public void testCartList()
-    {
+    public void testCartList() {
         String email = "user1@aaa.com";
 
         Pageable pageable = PageRequest.of(0,10);
 
-        cartDetailRepository.listOfMember(email, pageable);
+        cartDetailsRepository.listOfMember(email, pageable);
+
     }
 
 
     @Test
     @Transactional
     @Commit
-    public void testDummies() {
-        for (int i = 0; i <= 10; i++) {
+    public void testDummies(){
+
+        for (int i = 1; i <= 10; i++) {
             MemberEntity member = MemberEntity.builder()
-                    .email("user" + i + "@aaa.com")
+                    .email("user"+i+"@aaa.com")
                     .pw(passwordEncoder.encode("1111"))
-                    .role(i < 8 ? MemberRole.USER : MemberRole.ADMIN)
+                    .role( i < 8 ? MemberRole.USER: MemberRole.ADMIN)
                     .build();
-
             memberRepository.save(member);
-        }
-    }
-
-    @Test
-    @Transactional
-    @Commit
-    public void testDummies2()
-    {
+        }//end for
 
     }
+
+
+}
+
 
 //    @Test
 //    @Transactional
@@ -78,4 +74,4 @@ public class MemberRepositoryTests {
 //                    ;
 //        }
 //    }
-}
+

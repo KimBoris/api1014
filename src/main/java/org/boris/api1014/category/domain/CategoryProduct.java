@@ -9,8 +9,9 @@ import org.boris.api1014.product.domain.Product;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = {"product", "category"})
+@ToString(exclude = {"product","category"})
 public class CategoryProduct {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cpno;

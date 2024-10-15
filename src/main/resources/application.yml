@@ -8,9 +8,9 @@ spring:
     password: bootdbuser
 
     hikari:
-     minimum-idle: 2
-     maximum-pool-size: 5
-     connection-timeout: 5000
+      minimum-idle: 2
+      maximum-pool-size: 5
+      connection-timeout: 5000
 
 
   jpa:
@@ -33,4 +33,8 @@ org:
   boris:
     api21:
       path: api21
+
+logging:
+  level:
+    org.springframework.security.web: Trace
 

@@ -12,22 +12,27 @@ import org.springframework.data.domain.Pageable;
 
 @DataJpaTest
 @Log4j2
-@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ProductRepositoryTests {
+
     @Autowired
     private ProductRepository productRepository;
 
     @Test
-    public void testList1(){
+    public void testList1() {
+
         Pageable pageable = PageRequest.of(0,10);
 
         productRepository.list(pageable);
+
     }
 
-        @Test
-        public void testList2(){
-            PageRequestDTO pageRequestDTO = PageRequestDTO.builder().build();
+    @Test
+    public void testList2() {
 
-            log.info(productRepository.listByCno(1L, pageRequestDTO));
-        }
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().build();
+
+        log.info(productRepository.listByCno(1L, pageRequestDTO));
+    }
+
 }
