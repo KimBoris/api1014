@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductListDTO {
 
     private Long pno;
-    private String pname;
+    private String name;
     private int price;
     private long reviewCnt;
     private String fileName;

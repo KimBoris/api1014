@@ -31,10 +31,15 @@ spring:
 
 org:
   boris:
+    accessTime: 3
+    refreshTime: 10
+    alwaysNew: true
     api21:
       path: api21
 
 logging:
   level:
-    org.springframework.security.web: Trace
+    org.springframework.security.web: TRACE
+
+
 

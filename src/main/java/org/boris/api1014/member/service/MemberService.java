@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.boris.api1014.common.exception.CommonExceptions;
 import org.boris.api1014.member.domain.MemberEntity;
 import org.boris.api1014.member.dto.MemberDTO;
+import org.boris.api1014.member.exception.MemberExceptions;
 import org.boris.api1014.member.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class MemberService {
 
 
         //"이런아이디 없어" 예외 던진다.
-        MemberEntity member = result.orElseThrow(() -> CommonExceptions.READ_ERROR.get());
+        MemberEntity member = result.orElseThrow(() -> MemberExceptions.BAD_AUTH.get());
 
         //여기까지 내려온건 아이디는 존재한다는 것
         //pw없으면 처리해줘야한다. 원래는 추가적인 예외를 만들어서 써야한다.
@@ -42,7 +43,7 @@ public class MemberService {
         boolean match = passwordEncoder.matches(password, enPw);
 
         if (!match) {
-            throw CommonExceptions.READ_ERROR.get();
+            throw MemberExceptions.BAD_AUTH.get();
         }
 
         MemberDTO memberDTO = new MemberDTO();

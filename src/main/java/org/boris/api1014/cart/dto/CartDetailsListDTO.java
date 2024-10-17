@@ -8,15 +8,15 @@ import lombok.Data;
 public class CartDetailsListDTO {
 
     private Long pno;
-    private String pname;
+    private String name;
     private int price;
     private long reviewCnt;
     private String fileName;
     private int qty;
 
-    public CartDetailsListDTO(Long pno, String pname, int price, long reviewCnt, String fileName, int qty) {
+    public CartDetailsListDTO(Long pno, String name, int price, long reviewCnt, String fileName, int qty) {
         this.pno = pno;
-        this.pname = pname;
+        this.name = name;
         this.price = price;
         this.reviewCnt = reviewCnt;
         this.fileName = fileName;

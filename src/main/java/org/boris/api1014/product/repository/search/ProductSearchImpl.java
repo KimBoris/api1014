@@ -194,7 +194,7 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
 
             ProductListDTO dto = ProductListDTO.builder()
                     .pno(productObj.getPno())
-                    .pname(productObj.getPname())
+                    .name(productObj.getName())
                     .fileName(fileName)
                     .reviewCnt(count)
                     .tags(productObj.getTags().stream().toList())

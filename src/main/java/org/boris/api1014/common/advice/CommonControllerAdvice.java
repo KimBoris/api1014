@@ -3,30 +3,30 @@ package org.boris.api1014.common.advice;
 import lombok.extern.log4j.Log4j2;
 import org.boris.api1014.common.exception.TaskException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
-import java.util.Map;
-@RestControllerAdvice
+import java.util.Map;@RestControllerAdvice
 @Log4j2
 public class CommonControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<java.util.Map<String,Object>> handle(MethodArgumentNotValidException ex){
+    public ResponseEntity<java.util.Map<String, Object>> handle(MethodArgumentNotValidException ex) {
 
         BindingResult bindingResult = ex.getBindingResult();
 
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
         ex.getFieldErrors().forEach(fieldError -> {
-
+            log.error("-------------");
             String key = fieldError.getField();
 
             Object value = fieldError.getDefaultMessage();
-            map.put(key,value);
+            map.put(key, value);
         });
 
 
@@ -35,11 +35,16 @@ public class CommonControllerAdvice {
     }
 
     @ExceptionHandler(TaskException.class)
-    public ResponseEntity<String> handle(TaskException ex){
+    public ResponseEntity<String> handle(TaskException ex) {
 
         return ResponseEntity.status(ex.getCode()).body(ex.getMessage());
 
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Map<String, Object>> handle(AccessDeniedException ex) {
 
+        Map<String, Object> map = Map.of("status", 403, "message", "Access Denied");
+        return ResponseEntity.status(403).body(map);
+    }
 }

@@ -17,7 +17,7 @@ public interface CartDetailRepository extends JpaRepository<CartDetails, Long> {
     @Query("""
             SELECT  
             new org.boris.api1014.cart.dto.CartDetailsListDTO(
-                p.pno, p.pname, p.price, count(r), attach.filename,
+                p.pno, p.name, p.price, count(r), attach.filename,
                 cd.qty
                 )
             FROM 
